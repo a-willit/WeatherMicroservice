@@ -1,4 +1,5 @@
-FROM microsoft/dotnet:1.1-sdk-msbuild
+FROM microsoft/aspnetcore:2.0
+ARG source
 
 #ENV http_proxy http://proxy-lmi.global.lmco.com:80/
 #ENV https_proxy http://proxy-lmi.global.lmco.com:80/
