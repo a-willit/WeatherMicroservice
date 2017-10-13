@@ -14,8 +14,9 @@ namespace WeatherMicroservice
     {
         public static void Main(string[] args)
         {
+//                .UseUrls("http://*:1000")
             var host = new WebHostBuilder()
-                .UseUrls("http://*:1000")
+                .UseUrls(GetServerUrls(args))
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
@@ -23,6 +24,19 @@ namespace WeatherMicroservice
                 .Build();
 
             host.Run();
+        }
+        private static string[] GetServerUrls(string[] args)
+        {
+
+            List<string> urls = new List<string>();
+            for (int i = 0; i < args.Length; i++)
+            {
+                if ("--server.urls".Equals(args[i], StringComparison.OrdinalIgnoreCase))
+                {
+                    urls.Add(args[i + 1]);
+                }
+            }
+            return urls.ToArray();
         }
     }
 }
